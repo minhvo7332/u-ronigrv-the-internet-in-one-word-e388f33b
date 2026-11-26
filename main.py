@@ -11,6 +11,11 @@ import os
 
 WORD = "cookies"
 
+# The gate only accepts one word, 1-30 chars, no whitespace: refuse to
+# write anything outside it rather than hand the judge an invalid entry.
+if not (1 <= len(WORD) <= 30) or any(ch.isspace() for ch in WORD):
+    raise SystemExit(f"entry word {WORD!r} is {len(WORD)} chars; gate needs one word of 1-30 chars")
+
 
 def main():
     os.makedirs("/output", exist_ok=True)
